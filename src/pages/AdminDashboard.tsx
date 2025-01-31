@@ -1,4 +1,4 @@
-import { Shield, Users, FileText } from "lucide-react";
+import { Shield, Users, FileText, LogOut } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -12,8 +12,10 @@ import {
 } from "@/components/ui/select";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const AdminDashboard = () => {
+  const navigate = useNavigate();
   const [users, setUsers] = useState([
     { id: 1, name: "John Doe", email: "john@example.com", role: "user" },
     { id: 2, name: "Jane Smith", email: "jane@example.com", role: "staff" },
@@ -27,12 +29,28 @@ const AdminDashboard = () => {
     toast.success(`User role updated successfully`);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("userRole");
+    toast.success("Logged out successfully");
+    navigate("/signin");
+  };
+
   return (
     <div className="min-h-screen bg-background p-8">
       <div className="max-w-7xl mx-auto">
-        <div className="flex items-center space-x-4 mb-8">
-          <Shield className="w-8 h-8 text-primary" />
-          <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center space-x-4">
+            <Shield className="w-8 h-8 text-primary" />
+            <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+          </div>
+          <Button 
+            variant="outline" 
+            onClick={handleLogout}
+            className="flex items-center gap-2"
+          >
+            <LogOut className="w-4 h-4" />
+            Logout
+          </Button>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
