@@ -38,7 +38,7 @@ const SignIn = () => {
         } else {
           localStorage.setItem("userRole", data.role);
           localStorage.setItem("token", data.token);
-          navigateToDashboard(data.role);
+          navigateToDatabase(data.role);
         }
       } else {
         toast({
@@ -159,8 +159,8 @@ const SignIn = () => {
                   onChange={setOtpCode}
                   render={({ slots }) => (
                     <InputOTPGroup>
-                      {slots.map((slot, index) => (
-                        <InputOTPSlot key={index} {...slot} />
+                      {slots.map((slot, idx) => (
+                        <InputOTPSlot key={idx} {...slot} index={idx} />
                       ))}
                     </InputOTPGroup>
                   )}
