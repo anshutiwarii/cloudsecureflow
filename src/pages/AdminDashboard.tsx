@@ -10,6 +10,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import SecurityMetrics from "@/components/SecurityMetrics";
+import AlertsPanel from "@/components/AlertsPanel";
+import ComplianceStatus from "@/components/ComplianceStatus";
+import SecurityScore from "@/components/SecurityScore";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
@@ -26,7 +30,7 @@ const AdminDashboard = () => {
     setUsers(users.map(user => 
       user.id === userId ? { ...user, role: newRole } : user
     ));
-    toast.success(`User role updated successfully`);
+    toast.success("User role updated successfully");
   };
 
   const handleLogout = () => {
@@ -53,42 +57,12 @@ const AdminDashboard = () => {
           </Button>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <Users className="w-5 h-5" />
-                <span>User Management</span>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>Manage user accounts and permissions</p>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <Shield className="w-5 h-5" />
-                <span>Security Settings</span>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>Configure security policies and controls</p>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <FileText className="w-5 h-5" />
-                <span>Audit Logs</span>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>View system audit logs and activities</p>
-            </CardContent>
-          </Card>
+        {/* Security Monitoring Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+          <SecurityScore />
+          <ComplianceStatus />
+          <SecurityMetrics />
+          <AlertsPanel />
         </div>
 
         {/* User Privileges Management Section */}

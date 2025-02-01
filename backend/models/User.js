@@ -23,6 +23,18 @@ const userSchema = new mongoose.Schema({
   department: {
     type: String,
     required: false
+  },
+  mfaEnabled: {
+    type: Boolean,
+    default: false
+  },
+  mfaSecret: {
+    type: String,
+    default: null
+  },
+  lastLogin: {
+    type: Date,
+    default: null
   }
 }, {
   timestamps: true
